@@ -2,24 +2,26 @@
 #
 # Nome:        Config_Data.R
 #
-# Título:      Configure project Data
+# T?tulo:      Configure project Data
 #
-# Verssão:     1.0
+# Verss?o:     1.0
 # Data:        2019-Jan-25
 # Autor:       Henrique C. Costa
 # License:     GPL (>=2)
 #
-# Descrição:   Script para download dos dados e carregamento.
+# Descri??o:   Script para download dos dados e carregamento.
 #              Favor Executar apenas uma vez.
 #
 # Detalhes:    Este script faz download dos dados diretamente do internet via link
-#              do site do SAEB, para os dados de 2017, da Prova Brasil. Além disso
-#              ao baixar os dados em formato .zip, faz a descompactação dos dados
-#              e acessa a pasta onde foi extraído e carrega a planilha dos referente
-#              ao questionário respondido pelo professor.
+#              do site do SAEB, para os dados de 2017, da Prova Brasil. Al?m disso
+#              ao baixar os dados em formato .zip, faz a descompacta??o dos dados
+#              e acessa a pasta onde foi extra?do e carrega a planilha dos referente
+#              ao question?rio respondido pelo professor.
 #
 #
-# Depende:     A linguagem de programação R (3.5) e todas as bibliotecas listadas.
+# Depende:     A linguagem de programa??o R (3.5) e todas as bibliotecas listadas.
+# 
+# Pacotes:     reshape2, tidyverse, scales, extrafont, ggrepel
 #
 ##-------------------------------------------------------------------------------------------##
 
@@ -27,42 +29,42 @@
 #   I M P O R T A N T E ! ! !
 #
 #   ESTE SCRIPT DEVE SER EXECUTADO
-#   APENAS UMA ÚNICA VEZ!
+#   APENAS UMA ?NICA VEZ!
 #------------------------------------------
 
 
-# Criando um valor único que representa o link para download
+# Criando um valor ?nico que representa o link para download
 url <-"http://download.inep.gov.br/microdados/microdados_saeb_2017.zip"
 
-# criando os diretório para download
+# criando os diret?rio para download
 temp <- tempfile()
 
-# criando os diretório para extração
+# criando os diret?rio para extra??o
 temp2 <- tempfile()
 
 
-# Download dos dados para o diretório "temp"
+# Download dos dados para o diret?rio "temp"
 download.file(url, temp)
 
-# Extraindo os dados zipado do diretório "temp" para "temp2"
+# Extraindo os dados zipado do diret?rio "temp" para "temp2"
 unzip(zipfile = temp, exdir = temp2)
 
-# Importando os dados do diretório "temp2"
-# Os dados são dos testes do professor
+# Importando os dados do diret?rio "temp2"
+# Os dados s?o dos testes do professor
 dados <- read.csv(file.path(temp2, "./DADOS/TS_PROFESSOR.csv"))
 
 # Ver os dados, se foram carregados corretamente
-View(data)
+View(dados)
 
 
 # salvar os dados em formato .Rdata para carrega-los
-# mais facilmente, nos próximos scripts.
+# mais facilmente, nos pr?ximos scripts.
 save(dados, file = "dados.rda")
 # ou se preferir ...
 # save(dados, file = "dados.RData")
 
-# remover as variáveis
-rm(data, temp, temp2, url)
+# remover as vari?veis
+rm(dados, temp, temp2, url)
 
 
 #--------------------------------------------------------
@@ -74,3 +76,87 @@ rm(data, temp, temp2, url)
 
 #---------------------------------------------------------------------------
 ############################################################################
+
+
+# Codigo para verificar se o pacote esta instalado,
+# se nao, o pacote sera instalado
+pkgs <- c("reshape2", "tidyverse", "scales", "extrafont", "ggrepel")
+if(!require(pkgs)) install.packages(pkgs)
+# Install from CRAN
+# install.packages("tidyverse")
+
+# Carrega a colecao TidyVerse
+library(tidyverse)
+# um exemplo
+
+
+############################################################################
+#
+# Configurando o tema:
+# Baixar e importar fonte: Source Sans Pro
+#-------------------------------------------------------------------
+
+
+# Criando um valor Ãºnico que representa o link para download da fonte
+url <-"https://fonts.google.com/download?family=Source%20Sans%20Pro"
+
+# criando os diretÃ³rio para download
+temp <- tempfile()
+
+# criando os diretÃ³rio para extraÃ§Ã£o 
+temp2 <- tempfile()
+
+
+# Download dos dados para o diretÃ³rio "temp"
+download.file(url, temp)
+
+# Extraindo os dados zipado do diretÃ³rio "temp" para "temp2"
+unzip(zipfile = temp, exdir = temp2)
+
+# Pacote necessÃ¡rio para criar os plots
+library(ggplot2)
+
+# Pacote para customizar a fonte nos plots
+library(extrafont)
+
+# funcao para importar a fonte
+font_import("./")
+y
+# ao importar, o sistema pedira 
+# que confirme a importacao
+# rode essa letra "y" para confirmar
+
+
+# carregar as fontes para customizacao
+loadfonts(device = "win")
+
+
+
+# criar temas de plotagem personalizados para anÃ¡lise de dados baseado no Storytelling da DataMeTricks
+datametricks_theme <-  theme(text=element_text(family="Source Sans Pro"),
+                             plot.title = element_text(size = 15, color = "black", face = "bold", hjust = 0),
+                             plot.subtitle = element_text(size = 11, hjust = 0, color="#666666"),
+                             plot.caption = element_text(size = 9, hjust = 0, vjust = 0, colour = "grey50"),
+                             axis.title.y = element_text(face = "bold", color = "gray30"),
+                             axis.title.x = element_text(face = "bold", color = "gray30", vjust = -0.25),
+                             axis.text.y = element_text(size = 9, color = "grey15"),
+                             axis.text.x = element_text(size = 9, color = "grey15", vjust = 0.5),
+                             panel.background = element_blank(),
+                             panel.border = element_blank(),
+                             panel.grid = element_blank(),
+                             strip.background = element_rect(fill = "white", colour = "grey75"),
+                             strip.text.y = element_text(face = "bold"),
+                             axis.line.x = element_line(colour = "grey75"),
+                             axis.line.y = element_line(colour = "grey75"),
+                             axis.line = element_line(colour = "grey75")
+)
+
+
+
+
+##-------------------------------------------------------------------------------------------##
+#
+# Pronto, agora Ã© sÃ³ utilizar o tema customizado da DataMeTricks
+#
+##-------------------------------------------------------------------------------------------##
+
