@@ -1,0 +1,2358 @@
+---
+title: |
+    | MICRODADOS DO SAEB - PROVA BRASIL 
+    | Questionário do Professor - Brasil
+author:
+- Henrique Cesar Costa^[[Mestre em Economia Aplicada e Cientista de Dados](https://about.me/henriquecosta)]
+date: "`r format(Sys.time(), '%d de %B, %Y')`"
+output:
+  pdf_document:
+    includes:
+      in_header: header.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r , echo=FALSE, message=FALSE}
+
+setwd("C:/Users/Henrique Costa/OneDrive/2019 - Data MeTricks/R PROJECTS/bartolomeu_saeb")
+
+## restaurar os dados salvos no espa?o de trabalho do usu?rio
+load("./dados/dados.rda") ## isso aqui ? equivalente a:
+## load("all.rda", .GlobalEnv)
+
+# Carrega a cole??o TidyVerse
+library(tidyverse)
+
+
+# Filtra todos as questoes para o Brasil
+BR_QST <- dados[,c(-1, -4, -5, -6, -7, -8)]
+
+
+# Apenas os que preencheram os questionario.
+BR_01 <- BR_QST %>%
+  filter(IN_PREENCHIMENTO_QUESTIONARIO == 1)
+
+
+```
+
+
+# QUESTIONÁRIO DO PROFESSOR
+
+Respostas do questionário aplicado ao Professor de cada turma e disciplina, dos anos/séries avaliados. 
+
+## Bases de dados de Professores
+
+Essas bases apresentam as respostas de professores e de diretores aos respectivos questionários. 
+
+Cabe ressaltar que, pelo fato de o questionário ser o mesmo para os professores dos três anos escolares avaliados, diferenciando-se apenas por conter blocos de itens específicos para cada um deles, a base de dados dos questionários dos professores não foi dividida por ano escolar testado, tal como ocorreu no caso das bases de alunos e de escolas. 
+
+Além disso, nas bases de diretores e de professores também só serão identificadas, por meio de seu código, as escolas que tiveram o 5º ano (4ªsérie) e/ou o 9º ano (8ª série) do EF e/ou 3ª série (4ª série) do EM avaliadas na Prova Brasil e tiveram seus resultados divulgados, de modo que as demais continuarão mascaradas.
+
+
+# QUESTÕES DE 1 À 125 PARA TODO O BRASIL.
+
+A variável **TX_RESP_Q000** indica a taxa de resposta para a questão 000.
+
+A seguir será descrito as frequências da taxa de resposta para cada questão, ou seja, para cada variável **TX_RESP_Q000**.
+
+As 3 primeiras questões serão preenchidas como exemplo. Para as demais questões, favor consultar o dicionário na pasta `dicionario\Dicionario_ANEB_Prova_Brasil_2017.xlsx`, ou na pasta questionario `questionario\Questionario do Professor.pdf`. 
+
+
+
+## QUESTÃO 1 - Qual é o seu sexo?
+
+A - Masculino.	
+
+B - Feminino.
+
+NA - Não respondeu
+
+
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+BR_QST <- BR_QST[,c(-1, -2, -3, -4)]
+
+summary(BR_QST[,1])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,1]))
+```
+
+#### Avaliação
+
+Observando a taxa de resposta e a quantidade de resposta, pode-se conclir que:
+
+- 12,62% são masculino.
+- 34,76% são feminino.
+- 52,61% não responderam.
+
+
+**Memória de cálculo: _exemplo da alternativa A_**
+Essa formula é válida para todas as alternativas.
+
+$$ \% = \frac{respostas \; da \; alternativa \; A}{quantidade \; de respostas} \, * \, 100 $$
+
+
+
+Exemplo de como calcular a taxa de resposta da alternativa **A**:
+
+$$ \frac{95153}{753668} * 100 = 12.62532 $$
+
+
+
+## QUESTÃO 2 - Você poderia nos dizer a sua faixa etária?
+
+A - Até 24 anos	
+
+B - De 25 a 29 anos
+
+C - De 30 a 39 anos
+
+D - De 40 a 49 anos
+
+E - De 50 a 54 anos
+
+F - 55 anos ou mais
+
+NA - Não respondeu
+
+
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,2])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,2]))
+```
+
+
+#### Avaliação
+
+Observando a taxa de resposta e a quantidade de resposta, pode-se conclir que:
+
+- 0,88% tem até 24 anos.
+- 3,31% De 25 a 29 anos.
+- 14,81% De 30 a 39 anos.
+- 17,60% De 40 a 49 anos.
+- 6,21% De 50 a 54 anos.
+- 4,19% 55 anos ou mais.
+- 52,98% Não responderam.
+
+**Memória de cálculo:**
+A formula descrita na questão 001 é válida para todas as alternativas em todas as respostas.
+
+
+
+
+
+## QUESTÃO 3 - Qual é a sua cor ou raça?
+
+A - Branca.
+
+B - Preta.
+
+C - Parda.
+
+D - Amarelo.
+
+E - Indígena.
+
+F - Não quero declarar.
+
+NA - Não respondeu
+
+
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,3])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,3]))
+```
+
+
+#### Avaliação
+
+Observando a taxa de resposta e a quantidade de resposta, pode-se conclir que:
+
+- 22,20% são Branca.
+- 3,86% são Preta.
+- 18,27% são Parda.
+- 1,29% são Amarelo.
+- 0,47% são Indígena.
+- 0,77% 55 anos ou mais.
+- 53,10% Não responderam.
+
+**Memória de cálculo:**
+A formula descrita na questão 001 é válida para todas as alternativas em todas as respostas.
+
+
+# QUESTÃO 4
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,4])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,4]))
+```
+
+
+# QUESTÃO 5
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,5])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,5]))
+```
+
+
+# QUESTÃO 6
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,6])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,6]))
+```
+
+
+# QUESTÃO 7
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,7])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,7]))
+```
+
+# QUESTÃO 8
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,8])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,8]))
+```
+
+# QUESTÃO 9
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,9])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,9]))
+```
+
+# QUESTÃO 10
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,10])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,10]))
+```
+
+# QUESTÃO 11
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,11])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,11]))
+```
+
+# QUESTÃO 12
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,12])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,12]))
+```
+
+# QUESTÃO 13
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,13])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,13]))
+```
+
+# QUESTÃO 14
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,14])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,14]))
+```
+
+# QUESTÃO 15
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,15])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,15]))
+```
+
+# QUESTÃO 16
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,16])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,16]))
+```
+
+# QUESTÃO 17
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,17])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,17]))
+```
+
+# QUESTÃO 18
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,18])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,18]))
+```
+
+# QUESTÃO 19
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,19])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,19]))
+```
+
+# QUESTÃO 20
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,20])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,20]))
+```
+
+
+
+
+
+# QUESTÃO 21
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,21])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,21]))
+```
+
+# QUESTÃO 22
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,22])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,22]))
+```
+
+# QUESTÃO 23
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,23])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,23]))
+```
+
+# QUESTÃO 24
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,24])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,24]))
+```
+
+# QUESTÃO 25
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,25])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,25]))
+```
+
+# QUESTÃO 26
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,26])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,26]))
+```
+
+# QUESTÃO 27
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,27])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,27]))
+```
+
+# QUESTÃO 28
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,28])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,28]))
+```
+
+# QUESTÃO 29
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,29])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,29]))
+```
+
+# QUESTÃO 30
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,30])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,30]))
+```
+
+
+
+
+# QUESTÃO 31
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,31])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,31]))
+```
+
+# QUESTÃO 32
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,32])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,32]))
+```
+
+# QUESTÃO 33
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,33])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,33]))
+```
+
+# QUESTÃO 34
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,34])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,34]))
+```
+
+# QUESTÃO 35
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,35])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,35]))
+```
+
+# QUESTÃO 36
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,36])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,36]))
+```
+
+# QUESTÃO 37
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,37])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,37]))
+```
+
+# QUESTÃO 38
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,38])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,38]))
+```
+
+# QUESTÃO 39
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,39])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,39]))
+```
+
+# QUESTÃO 40
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,40])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,40]))
+```
+
+
+
+# QUESTÃO 41
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,41])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,41]))
+```
+
+# QUESTÃO 42
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,42])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,42]))
+```
+
+# QUESTÃO 43
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,43])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,43]))
+```
+
+# QUESTÃO 44
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,44])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,44]))
+```
+
+# QUESTÃO 45
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,45])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,45]))
+```
+
+# QUESTÃO 46
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,46])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,46]))
+```
+
+# QUESTÃO 47
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,47])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,47]))
+```
+
+# QUESTÃO 48
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,48])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,48]))
+```
+
+# QUESTÃO 49
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,49])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,49]))
+```
+
+# QUESTÃO 50
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,50])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,50]))
+```
+
+
+
+# QUESTÃO 51
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,51])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,51]))
+```
+
+# QUESTÃO 52
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,52])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,52]))
+```
+
+# QUESTÃO 53
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,53])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,53]))
+```
+
+# QUESTÃO 54
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,54])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,54]))
+```
+
+# QUESTÃO 55
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,55])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,55]))
+```
+
+# QUESTÃO 56
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,56])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,56]))
+```
+
+# QUESTÃO 57
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,57])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,57]))
+```
+
+# QUESTÃO 58
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,58])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,58]))
+```
+
+# QUESTÃO 59
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,59])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,59]))
+```
+
+# QUESTÃO 60
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,60])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,60]))
+```
+
+
+
+# QUESTÃO 61
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,61])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,61]))
+```
+
+# QUESTÃO 62
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,62])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,62]))
+```
+
+# QUESTÃO 63
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,63])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,63]))
+```
+
+# QUESTÃO 64
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,64])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,64]))
+```
+
+# QUESTÃO 65
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,65])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,65]))
+```
+
+# QUESTÃO 66
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,66])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,66]))
+```
+
+# QUESTÃO 67
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,67])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,67]))
+```
+
+# QUESTÃO 68
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,68])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,68]))
+```
+
+# QUESTÃO 69
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,69])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,69]))
+```
+
+# QUESTÃO 70
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,70])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,70]))
+```
+
+
+
+# QUESTÃO 71
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,71])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,71]))
+```
+
+# QUESTÃO 72
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,72])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,72]))
+```
+
+# QUESTÃO 73
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,73])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,73]))
+```
+
+# QUESTÃO 74
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,74])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,74]))
+```
+
+# QUESTÃO 75
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,75])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,75]))
+```
+
+# QUESTÃO 76
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,76])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,76]))
+```
+
+# QUESTÃO 77
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,77])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,77]))
+```
+
+# QUESTÃO 78
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,78])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,78]))
+```
+
+# QUESTÃO 79
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,79])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,79]))
+```
+
+# QUESTÃO 80
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,80])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,80]))
+```
+
+
+
+# QUESTÃO 81
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,81])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,81]))
+```
+
+# QUESTÃO 82
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,82])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,82]))
+```
+
+# QUESTÃO 83
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,83])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,83]))
+```
+
+# QUESTÃO 84
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,84])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,84]))
+```
+
+# QUESTÃO 85
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,85])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,85]))
+```
+
+# QUESTÃO 86
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,86])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,86]))
+```
+
+# QUESTÃO 87
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,87])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,87]))
+```
+
+# QUESTÃO 88
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,88])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,88]))
+```
+
+# QUESTÃO 89
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,89])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,89]))
+```
+
+# QUESTÃO 90
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,90])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,90]))
+```
+
+
+
+# QUESTÃO 91
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,91])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,91]))
+```
+
+# QUESTÃO 92
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,92])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,92]))
+```
+
+# QUESTÃO 93
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,93])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,93]))
+```
+
+# QUESTÃO 94
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,94])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,94]))
+```
+
+# QUESTÃO 95
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,95])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,95]))
+```
+
+# QUESTÃO 96
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,96])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,96]))
+```
+
+# QUESTÃO 97
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,97])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,97]))
+```
+
+# QUESTÃO 98
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,98])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,98]))
+```
+
+# QUESTÃO 99
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,99])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,99]))
+```
+
+# QUESTÃO 100
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,100])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,100]))
+```
+
+
+
+# QUESTÃO 101
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,101])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,101]))
+```
+
+# QUESTÃO 102
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,102])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,102]))
+```
+
+# QUESTÃO 103
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,103])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,103]))
+```
+
+# QUESTÃO 104
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,104])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,104]))
+```
+
+# QUESTÃO 105
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,105])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,105]))
+```
+
+# QUESTÃO 106
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,106])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,106]))
+```
+
+# QUESTÃO 107
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,107])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,107]))
+```
+
+# QUESTÃO 108
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,108])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,108]))
+```
+
+# QUESTÃO 109
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,109])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,109]))
+```
+
+# QUESTÃO 110
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,110])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,110]))
+```
+
+
+
+# QUESTÃO 111
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,111])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,111]))
+```
+
+# QUESTÃO 112
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,112])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,112]))
+```
+
+# QUESTÃO 113
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,113])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,113]))
+```
+
+# QUESTÃO 114
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,114])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,114]))
+```
+
+# QUESTÃO 115
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,115])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,115]))
+```
+
+# QUESTÃO 116
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,116])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,116]))
+```
+
+# QUESTÃO 117
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,117])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,117]))
+```
+
+# QUESTÃO 118
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,118])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,118]))
+```
+
+# QUESTÃO 119
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,119])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,119]))
+```
+
+# QUESTÃO 120
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,120])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,120]))
+```
+
+
+
+
+# QUESTÃO 121
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,121])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,121]))
+```
+
+
+# QUESTÃO 122
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,122])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,122]))
+```
+
+
+# QUESTÃO 123
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,123])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,123]))
+```
+
+
+# QUESTÃO 124
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,124])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,124]))
+```
+
+
+# QUESTÃO 125
+
+### Taxa de Resposta:
+
+```{r, echo=FALSE}
+
+summary(BR_QST[,125])
+
+```
+
+### Quantidade de respostas:
+
+```{r, echo=FALSE}
+
+sum(summary(BR_QST[,125]))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

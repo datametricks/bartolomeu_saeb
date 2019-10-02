@@ -1,0 +1,300 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfauthor={Henrique Cesar Costa},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{MICRODADOS DO SAEB - PROVA BRASIL\\
+Questionário do Professor}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Henrique Cesar Costa\footnote{\href{https://about.me/henriquecosta}{Mestre
+  em Economia Aplicada e Cientista de Dados}}}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{01 de outubro, 2019}
+
+
+\usepackage[default]{sourcesanspro}
+\usepackage[T1]{fontenc}
+\usepackage{titling}
+
+\pretitle{%
+	\begin{center}
+		\LARGE
+		\includegraphics[width=6cm,height=8cm]{logo.png}\\[\bigskipamount]
+	}
+\posttitle{\end{center}}
+
+
+\usepackage{graphicx}
+   \usepackage{fancyhdr}
+   \pagestyle{fancy}
+   \setlength\headheight{28pt}
+   \fancyhead[R]{\includegraphics[width=2cm]{logo.png}}
+   \fancyfoot[LE,RO]{}
+
+\begin{document}
+\maketitle
+
+\hypertarget{questionario-do-professor}{%
+\section{QUESTIONÁRIO DO PROFESSOR}\label{questionario-do-professor}}
+
+Respostas do questionário aplicado ao Professor de cada turma e
+disciplina, dos anos/séries avaliados.
+
+\hypertarget{bases-de-dados-de-professores}{%
+\subsection{Bases de dados de
+Professores}\label{bases-de-dados-de-professores}}
+
+Essas bases apresentam as respostas de professores e de diretores aos
+respectivos questionários.
+
+Cabe ressaltar que, pelo fato de o questionário ser o mesmo para os
+professores dos três anos escolares avaliados, diferenciando-se apenas
+por conter blocos de itens específicos para cada um deles, a base de
+dados dos questionários dos professores não foi dividida por ano escolar
+testado, tal como ocorreu no caso das bases de alunos e de escolas.
+
+Além disso, nas bases de diretores e de professores também só serão
+identificadas, por meio de seu código, as escolas que tiveram o 5º ano
+(4ªsérie) e/ou o 9º ano (8ª série) do EF e/ou 3ª série (4ª série) do EM
+avaliadas na Prova Brasil e tiveram seus resultados divulgados, de modo
+que as demais continuarão mascaradas.
+
+\hypertarget{questoes-de-1-a-125-para-todo-o-brasil.}{%
+\section{QUESTÕES DE 1 À 125 PARA TODO O
+BRASIL.}\label{questoes-de-1-a-125-para-todo-o-brasil.}}
+
+A variável \textbf{TX\_RESP\_Q000} indica a taxa de resposta para a
+questão 000.
+
+A seguir será descrito as frequências da taxa de resposta para cada
+questão, ou seja, para cada variável \textbf{TX\_RESP\_Q000}.
+
+As 3 primeiras questões serão preenchidas como exemplo. Para as demais
+questões, favor consultar o dicionário na pasta
+\texttt{dicionario\textbackslash{}Dicionario\_ANEB\_Prova\_Brasil\_2017.xlsx},
+ou na pasta questionario
+\texttt{questionario\textbackslash{}Questionario\ do\ Professor.pdf}.
+
+\hypertarget{questao-1---qual-e-o-seu-sexo}{%
+\subsection{QUESTÃO 1 - Qual é o seu
+sexo?}\label{questao-1---qual-e-o-seu-sexo}}
+
+A - Masculino.
+
+B - Feminino.
+
+NA - Não respondeu
+
+\hypertarget{taxa-de-resposta}{%
+\subsubsection{Taxa de Resposta:}\label{taxa-de-resposta}}
+
+\begin{verbatim}
+##             A      B 
+## 396529  95153 261986
+\end{verbatim}
+
+\hypertarget{quantidade-de-respostas}{%
+\subsubsection{Quantidade de respostas:}\label{quantidade-de-respostas}}
+
+\begin{verbatim}
+## [1] 753668
+\end{verbatim}
+
+\hypertarget{avaliacao}{%
+\paragraph{Avaliação}\label{avaliacao}}
+
+Observando a taxa de resposta e a quantidade de resposta, pode-se
+conclir que:
+
+\begin{itemize}
+\tightlist
+\item
+  12,62\% são masculino.
+\item
+  34,76\% são feminino.
+\item
+  52,61\% não responderam.
+\end{itemize}
+
+\textbf{Memória de cálculo:} \$ \% =
+\frac{respostas \, da \, letra \, A}{quantidade \, de respostas} , * ,
+100 \$
+
+\$ \frac{95153}{753668} * 100 = 12.62532 \$
+
+\hypertarget{questao-2---voce-poderia-nos-dizer-a-sua-faixa-etaria}{%
+\subsection{QUESTÃO 2 - Você poderia nos dizer a sua faixa
+etária?}\label{questao-2---voce-poderia-nos-dizer-a-sua-faixa-etaria}}
+
+A - Masculino.
+
+B - Feminino.
+
+NA - Não respondeu
+
+\hypertarget{taxa-de-resposta-1}{%
+\subsubsection{Taxa de Resposta:}\label{taxa-de-resposta-1}}
+
+\begin{verbatim}
+##             A      B      C      D      E 
+## 399858  16126  82296 120217  75070  60101
+\end{verbatim}
+
+\hypertarget{quantidade-de-respostas-1}{%
+\subsubsection{Quantidade de
+respostas:}\label{quantidade-de-respostas-1}}
+
+\begin{verbatim}
+## [1] 753668
+\end{verbatim}
+
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see \url{http://rmarkdown.rstudio.com}.
+
+When you click the \textbf{Knit} button a document will be generated
+that includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+\end{verbatim}
+
+\hypertarget{including-plots}{%
+\subsection{Including Plots}\label{including-plots}}
+
+You can also embed plots, for example:
+
+\includegraphics{relatorio_files/figure-latex/pressure-1.pdf}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
+
+
+\end{document}

@@ -1,0 +1,71 @@
+---
+title: |
+    | MICRODADOS DO SAEB - PROVA BRASIL 
+    | Questionário do Professor
+author:
+- Henrique Cesar Costa^[[Mestre em Economia Aplicada e Cientista de Dados](https://about.me/henriquecosta)]
+date: "`r format(Sys.time(), '%d de %B, %Y')`"
+output:
+  pdf_document:
+    includes:
+      in_header: header.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r , echo=FALSE, message=FALSE}
+
+setwd("C:/Users/Henrique Costa/OneDrive/2019 - Data MeTricks/R PROJECTS/bartolomeu_saeb")
+
+## restaurar os dados salvos no espa?o de trabalho do usu?rio
+load("./dados/dados.rda") ## isso aqui ? equivalente a:
+## load("all.rda", .GlobalEnv)
+
+# Carrega a cole??o TidyVerse
+library(tidyverse)
+
+
+# Filtra todos as questoes para o Brasil
+BR_QST <- dados[,c(-1, -4, -5, -6, -7, -8)]
+
+
+# Apenas os que preencheram os questionario.
+BR_01 <- BR_QST %>%
+  filter(IN_PREENCHIMENTO_QUESTIONARIO == 1)
+
+
+```
+
+
+# QUESTIONÁRIO DO PROFESSOR
+
+Respostas do questionário aplicado ao Professor de cada turma e disciplina, dos anos/séries avaliados. 
+
+## Bases de dados de Professores
+
+Essas bases apresentam as respostas de professores e de diretores aos respectivos questionários. 
+
+Cabe ressaltar que, pelo fato de o questionário ser o mesmo para os professores dos três anos escolares avaliados, diferenciando-se apenas por conter blocos de itens específicos para cada um deles, a base de dados dos questionários dos professores não foi dividida por ano escolar testado, tal como ocorreu no caso das bases de alunos e de escolas. 
+
+Além disso, nas bases de diretores e de professores também só serão identificadas, por meio de seu código, as escolas que tiveram o 5º ano (4ªsérie) e/ou o 9º ano (8ª série) do EF e/ou 3ª série (4ª série) do EM avaliadas na Prova Brasil e tiveram seus resultados divulgados, de modo que as demais continuarão mascaradas.
+
+
+# QUESTÕES DE 1 À 125 PARA TODO O BRASIL.
+
+A variável **TX_RESP_Q000** indica a taxa de resposta para a questão 000.
+
+A seguir será descrito as frequências da taxa de resposta para cada questão, ou seja, para cada variável **TX_RESP_Q000**.
+
+As 3 primeiras questões serão preenchidas como exemplo. Para as demais questões, favor consultar o dicionário na pasta `dicionario\Dicionario_ANEB_Prova_Brasil_2017.xlsx`, ou na pasta questionario `questionario\Questionario do Professor.pdf`. 
+
+
+
+# TODAS AS QUESTÕES
+
+
+
+
